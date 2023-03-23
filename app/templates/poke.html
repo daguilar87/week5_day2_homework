@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POKE</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    {% include 'nav.html' %}
+
+    {% block content %}
+    
+    
+    {% endblock %}
+
+<h1>FIND YOUR POKEMON DATA HERE</h1>
+<form method='POST'>
+    {{x.hidden_tag()}}
+    {{x.name}}
+    {{x.submit}}
+
+</form>
+{% if w %}
+    <div>
+    <p>Pokemon Name:{{w.name}}</p>
+    <p>Ability:{{w.ability}}</p>
+    <p>Front Shiny Sprite:<img src="{{w.sprites}}"></p>
+    <p>Base Stat For Hp:{{w.hp_base_experience}}</p>
+    <p>Base Stat For Defense:{{w.defense_base_stat}}</p>
+    <p>Base Stat For Attack:{{w.attack_base_state}}</p>
+    
+    
+    
+    </div>
+{% endif %}
+
+
+
