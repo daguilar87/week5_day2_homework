@@ -1,8 +1,10 @@
 from app import app
 
-from flask import render_template, request, url_for
+from flask import render_template, request, url_for, redirect
 from .forms import Pokeform
 import requests, json
+from flask_login import current_user, login_user, logout_user
+from .models import User
 
 def pokeapi(name):
         url =f'https://pokeapi.co/api/v2/pokemon/{name}'
