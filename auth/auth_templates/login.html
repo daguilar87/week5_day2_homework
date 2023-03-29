@@ -1,23 +1,41 @@
-
 {% extends 'base.html' %}
-
 {% block content %}
-<h1>THIS WILL BE YOUR LOGIN PAGE</h1>
-<div class = 'container'>
-    <div class = "row justify-content-center">
-        <form method='POST' class= 'col-4'>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'styles/login.css') }}">
+</head>
+
+
+
+
+
+
+
+<div class="home">
+    <div class="text">
+        <h1>Welcome Back!</h1>
+    <div class="form">
+<div class='container'>
+    <div class="row justify-content-center">
+        <form method='POST' class='col-4'>
             {{ form.hidden_tag() }}
 
 
             {{ form.username(class='form-control', placeholder='Username') }}
-            {{ form.password(class='form-control', placeholder='Password') }}
-            {{ form.submit(class='btn btn-primary', placeholder='Submit') }}
+            {{ form.password(class='form-control ', placeholder='Password') }}
+            {{ form.submit(class='btn button', placeholder='Submit') }}
         </form>
 
     </div>
 </div>
+</div>
+</div>
 
 <form>
-
+</body>
+</html>
 
 {% endblock %}

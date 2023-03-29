@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import logout_user, login_user, current_user
 from werkzeug.security import check_password_hash
 from app.models import User
@@ -21,16 +21,13 @@ def loginPage():
             password = form.password.data
 
             user = User.query.filter_by(username=username).first()
-        # SELECT * FROM user WHERE username = <username variable>
             if user:
                 if check_password_hash(user.password, password):
-                    print("Yay you're logged in!")
                     login_user(user)
-                    print(current_user)
-                    print(current_user.username)
+
                     return redirect(url_for('homePage'))
                 else:
-                    print("Wrong password")
+                    flash('WRONG PASSWORD...', 'warning')
 
             else:
              return redirect(url_for('auth.loginPage'))

@@ -11,6 +11,7 @@ from . import routes
 from .models import db, User
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from .profile.routes import profile
 
 login = LoginManager()
 
@@ -25,3 +26,4 @@ login.init_app(app)
 login.login_view = 'auth.loginPage'
 
 app.register_blueprint(auth)
+app.register_blueprint(profile)

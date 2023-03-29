@@ -1,0 +1,27 @@
+/* #hi{
+    padding-left: 30%;
+} */
+
+.home{
+background-image:linear-gradient(rgba(0, 0, 0, 0.322), rgba(0, 0, 0, 0.356)), url(images/Poke_Ball.webp);
+height: 100%;
+padding-bottom: 354px;
+background-repeat: no-repeat;
+background-size: contain;
+background-position: center;
+position:relative;
+}
+
+
+.button{
+    background-color: red;
+    justify-content: center;
+    color: white;
+    font-weight: 550;
+}
+
+.text{
+    text-align: center;
+    padding-top: 350px;
+    color: white;
+}

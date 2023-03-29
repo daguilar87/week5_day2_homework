@@ -21,3 +21,37 @@ class User(db.Model, UserMixin):
     def saveUser(self):
         db.session.add(self)
         db.session.commit()
+
+class Pokemon(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    ability = db.Column(db.String)
+    sprites = db.Column(db.String)
+    hp = db.Column(db.String)
+    defense = db.Column(db.String)
+    attack = db.Column(db.String)
+    # date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+                                #  notice          ^^^^^ --> lowercase?  yep.  User.id
+
+    
+    # def __init__(self, pname, user_id ):
+    #     self.pname = pname
+    #     self.user_id = user_id
+    
+    def __init__(self, name, ability, sprites, hp, defense, attack):
+        self.name = name
+        self.ability = ability
+        self.sprites = sprites
+        self.hp = hp
+        self.defense = defense
+        self.attack = attack
+        # self.user_id = user_id
+
+    def saveFind(self):
+        db.session.add(self)
+        db.session.commit()
+
+    # def deletePoke(self):
+    #     db.session.delete(self)
+    #     db.session.commit()

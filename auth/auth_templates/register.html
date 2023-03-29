@@ -1,23 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>THIS WILL BE YOUR register or sign up PAGE</h1>
-<div class = 'container'>
-    <div class = "row justify-content-center">
-        <form method='POST' class= 'col-4'>
-            {{ form.hidden_tag() }}
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'styles/register.css') }}">
+</head>
+<div class="home">
+    <div class="text">
+        <h1>Sign Up Today!</h1>
+        <div class='container'>
+            <div class="row justify-content-center">
+                <form method='POST' class='col-4'>
+                    {{ form.hidden_tag() }}
 
 
-            {{ form.username(class='form-control', placeholder='Username') }}
-            {{ form.email(class='form-control', placeholder='Email') }}
-            {{ form.password(class='form-control', placeholder='Password') }}
-            {{ form.confirm_password(class='form-control', placeholder='Confirm Password') }}
-            {{ form.submit(class='btn btn-primary', placeholder='Submit') }}
-        </form>
+                    {{ form.username(class='form-control', placeholder='Username') }}
+                    {{ form.email(class='form-control', placeholder='Email') }}
+                    {{ form.password(class='form-control', placeholder='Password') }}
+                    {{ form.confirm_password(class='form-control', placeholder='Confirm Password') }}
+                    {{ form.submit(class='btn button', placeholder='Submit') }}
+                </form>
 
+            </div>
+        </div>
     </div>
 </div>
-
 <form>
 
 
