@@ -5,15 +5,22 @@
     <li class="nav-item">
       <a class="nav-link active" id="active" aria-current="page" href="{{url_for('homePage')}}">Home</a>
     </li>
+    {% if current_user.is_authenticated %}
     <li class="nav-item">
-      <a class="nav-link active" id="active"  aria-current="page" href="{{url_for('pokePage')}}">Find Pokemon Stats</a>
+      <a class="nav-link active" id="active"  aria-current="page" href="{{url_for('pokePage')}}">Find Pokemon</a>
     </li>
+    {%else%}
+    
+
     <li class="nav-item">
       <a class="nav-link" id="active" href="{{url_for('auth.registerPage')}}">Register</a>
     </li>
+
+
     <li class="nav-item">
       <a class="nav-link" id="active" href="{{url_for('auth.loginPage')}}">Login</a>
     </li>
+    {%endif%}
 
     {% if current_user.is_authenticated %}
     <li class="nav-item">
@@ -21,6 +28,9 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" style="color:white">{{current_user.username}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" id="active" aria-current="page" href="{{ url_for('feed') }}">Your Team!</a>
     </li>
     {%endif%}
   </ul>

@@ -19,27 +19,42 @@
     {% endblock %}
 <div class="home">
 <div class="text">
-<h1>Search Pokemon Stats!</h1>
-<h1>Register Now To Build Your Profile!</h1>
+<h1>Search For The Pokemon You Want To Acquire!</h1>
 <form method='POST'>
-    {{x.hidden_tag()}}
-    {{x.name}}
-    {{x.submit (class ="button")}}
+    {{form.hidden_tag()}}
+    {{form.name}}
+    {{form.submit}}
 
 </form>
-{% if w %}
-    <div>
-    <p>Pokemon Name:{{w.name}}</p>
-    <p>Ability:{{w.ability}}</p>
-    <p>Front Shiny Sprite:<img src="{{w.sprites}}"></p>
-    <p>Base Stat For Hp:{{w.hp_base_experience}}</p>
-    <p>Base Stat For Defense:{{w.defense_base_stat}}</p>
-    <p>Base Stat For Attack:{{w.attack_base_state}}</p>
-    
-</div>
+{% if check %}
+
+
+
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{check.sprites}}" alt="">
+    <div class="card-body">
+      <h5 class="card-title">{{check.name.title()}}</h5>
+      <p>Ability: {{check.ability.title()}}</p>
+      <p>Hp: {{check.hp}}</p>
+      <p>Defense: {{check.defense}}</p>
+      <p>Attack: {{check.attack}}</p>
+      <a href="{{ url_for('catchP', pokemon_id=check.id) }}" class="btn btn-primary">Catch Me!</a>
+    </div>
+  </div>
+    <!-- <div>
+        <p>Pokemon Name:{{check.name}}</p>
+        <p>Ability:{{check.ability}}</p>
+        <p>Front Shiny Sprite:<img src="{{check.sprites}}"></p>
+        <p>Base Stat For Hp:{{check.hp_base_experience}}</p>
+        <p>Base Stat For Defense:{{check.defense_base_stat}}</p>
+        <p>Base Stat For Attack:{{check.attack_base_state}}</p>
+        <a href="{{ url_for('catchP', pokemon_id=check.id) }}" class="btn btn-primary">Catch Me!</a>
+    </div> -->
+        
 </div>
     </div>
 {% endif %}
+
 
 
 

@@ -25,7 +25,7 @@ def loginPage():
                 if check_password_hash(user.password, password):
                     login_user(user)
 
-                    return redirect(url_for('homePage'))
+                    return redirect(url_for('pokePage'))
                 else:
                     flash('WRONG PASSWORD...', 'warning')
 
