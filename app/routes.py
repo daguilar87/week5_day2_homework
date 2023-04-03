@@ -27,7 +27,8 @@ from sqlalchemy import desc
 
 @app.route('/')
 def homePage():
-    return render_template('index.html')
+    users = User.query.all()
+    return render_template('index.html', users=users)
 
 @app.route('/poke',methods=['GET','POST'])
 @login_required
@@ -35,7 +36,7 @@ def pokePage():
 
     form = Pokeform()
     if request.method=='POST':
-            pname= form.name.data
+            pname= form.name.data.lower()
             print('POST')
             check = Pokemon.query.filter_by(name=pname).first()
             if check:
@@ -87,5 +88,37 @@ def releaseP(pokemon_id):
         current_user.unCatch(poke)
         flash(f"Succesfully caught!", category='success')
     return redirect(url_for('feed', poke= poke) )
+
+@app.route('/quarl')
+@login_required
+def Quarl():
+    users = User.query.all()
+    return render_template('battle.html', users=users)
+
+@app.route('/quarl/<int:user_id> <int:opp_id>')
+@login_required
+def theQuarl(user_id, opp_id):
+    t_list= current_user.caught.all()
+    print(t_list)
+    current = 0
+    opp_list = User.query.filter_by(id=opp_id).first().caught.all()
+    print(opp_list)
+    opp_total = 0
+    opp = User.query.filter_by(id=opp_id).first()
+    for poke in t_list:
+        current += poke.attack + poke.hp + poke.defense
+    for poke in opp_list:
+        opp_total += poke.attack + poke.hp + poke.defense
+    if current > opp_total:
+        current_user.win()
+        opp.lose()
+    elif current < opp_total:
+        current_user.lose()
+        opp.win()
+        flash(f'Today wasnt your day try again tomorrow!')
+    return redirect(url_for('Quarl', user=user_id, opp_id=opp_id))
+
+
+
 
 

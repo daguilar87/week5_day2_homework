@@ -13,7 +13,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
     integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
     crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="{{ url_for('static', filename= 'styles/index.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename= 'styles/battle.css') }}">
 </head>
 {% include 'nav.html' %}
 
@@ -25,31 +25,26 @@
 <body>
   <div class="home">
     <div class="text">
-      <h1>Welcome To POKE Start Your Adventure Today Go Battle Other Teams!</h1>
+      <h1>Test Your Luck With Other Teams!</h1>
      
-<!-- <div class="container">
+<div class="container">
   <div class="row">
     <div class="card" style="width: 18rem;">
       <ul class="list-group list-group-flush">
 
         {% for u in users %}
 
-        {% if u.username == current_user.username %}
+        {% if u.username != current_user.username %}
 
-        {% elif u.flag %}
         <li class="list-group-item"><b>{{ u.username }}</b></li>
-      
-
-        {% else %}
-        <li class="list-group-item"><b>{{ u.username }}</b></li>
-        
+        <a href="{{ url_for('theQuarl', user_id=u.id, opp_id=u.id) }}" class="btn btn-primary">Battle!</a>
 
         {% endif %}
         {% endfor %}
       </ul>
     </div>
   </div>
-</div> -->
+</div>
     </div>
 
 

@@ -1,0 +1,21 @@
+.home{
+    background-image:linear-gradient(rgba(0, 0, 0, 0.322), rgba(0, 0, 0, 0.356)), url(images/Poke_Ball.webp);
+    height: 100%;
+    padding-bottom: 438px;  
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    position:relative;
+    }
+    
+    .container{
+        width: 300px;
+        /* justify-content: center; */
+        /* align-items: center; */
+        text-align: center;
+
+    }
+
+    .card{
+        /* background-color: red; */
+    }

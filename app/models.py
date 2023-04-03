@@ -16,6 +16,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(50), nullable=False, unique=True)
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
+    wins = db.Column(db.Integer, default=0)
+    losses = db.Column(db.Integer, default=0)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
     caught = db.relationship('Pokemon',
             secondary = 'catch',
@@ -27,6 +29,8 @@ class User(db.Model, UserMixin):
         self.username = username
         self.email = email
         self.password = generate_password_hash(password)
+        self.wins = 0
+        self.losses = 0
         
 
     def saveUser(self):
@@ -41,23 +45,23 @@ class User(db.Model, UserMixin):
         self.caught.append(poke)
         db.session.commit()
     
+    def win(self):
+        self.wins += 1
+        db.session.commit()
+
+    def lose(self):
+        self.losses += 1
+        db.session.commit()
+    
 
 class Pokemon(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     ability = db.Column(db.String)
     sprites = db.Column(db.String)
-    hp = db.Column(db.String)
-    defense = db.Column(db.String)
-    attack = db.Column(db.String)
-    # date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
-    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-                                #  notice          ^^^^^ --> lowercase?  yep.  User.id
-
-    
-    # def __init__(self, pname, user_id ):
-    #     self.pname = pname
-    #     self.user_id = user_id
+    hp = db.Column(db.Integer)
+    defense = db.Column(db.Integer)
+    attack = db.Column(db.Integer)
     
     def __init__(self, name, ability, sprites, hp, defense, attack):
         self.name = name
@@ -66,12 +70,8 @@ class Pokemon(db.Model):
         self.hp = hp
         self.defense = defense
         self.attack = attack
-        # self.user_id = user_id
+        
 
     def saveFind(self):
         db.session.add(self)
         db.session.commit()
-
-    # def deletePoke(self):
-    #     db.session.delete(self)
-    #     db.session.commit()
