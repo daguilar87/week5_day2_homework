@@ -26,21 +26,27 @@
   <div class="home">
     <div class="text">
       <h1>Test Your Luck With Other Teams!</h1>
+
      
 <div class="container">
   <div class="row">
     <div class="card" style="width: 18rem;">
       <ul class="list-group list-group-flush">
 
-        {% for u in users %}
+        {% for u in users  %}
+       
 
         {% if u.username != current_user.username %}
 
-        <li class="list-group-item"><b>{{ u.username }}</b></li>
-        <a href="{{ url_for('theQuarl', user_id=u.id, opp_id=u.id) }}" class="btn btn-primary">Battle!</a>
+        <li class="list-group-item"><b>{{ u.username.title() }}</b></li>
+        <p>Wins: {{u.wins}}</p>
+        <p>Losses: {{u.losses}}</p>
+        <a href="{{ url_for('theQuarl', user_id=u.id, opp_id=u.id) }}" class="buttonc btn ">Battle!</a>
 
         {% endif %}
         {% endfor %}
+       
+
       </ul>
     </div>
   </div>

@@ -1,0 +1,85 @@
+.home{
+    background-image:linear-gradient(rgba(0, 0, 0, 0.322), rgba(0, 0, 0, 0.356)), url(images/Poke_Ball.webp);
+    height: 100%;
+    padding-bottom: 250px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    position:relative;
+    }
+    
+    
+    /* .button{
+        background-color: red;
+        justify-content: center;
+        color: white;
+        font-weight: 550;
+        border-radius: 4px;
+        border: none;
+    }
+    
+    .text{
+        text-align: center;
+        padding-top: 30px;
+        color: white;
+        justify-content: center;
+        align-items: center;
+    }
+
+    p{
+        color: black;
+    }
+
+    .card-title{
+        color: black;
+    }
+
+    .card{
+    display: flex;
+    flex-direction: row;
+   
+    
+
+        /* display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        flex-wrap: wrap;
+        background-color: aqua; */
+          
+    /* }
+
+    .card-img-top{
+        height:300px;
+        width: 300px;
+    }  */
+
+    .card {
+        margin: 0 auto;
+        float: none;
+        margin-bottom: 10px;
+        background-color: transparent;
+        color: black;
+        flex: 33%;
+        margin: 0;
+        margin-left: 5px;
+        border-width: 5px;
+        
+        
+    }
+    
+    .card-body {
+        background-color: transparent;
+        color: white;
+        text-align: center;
+    }
+
+    h1{
+        text-align: center;
+    }
+
+    .buttonc{
+        color: white;
+        background-color: red;
+        border: none;
+        border-radius: 5px;
+    }

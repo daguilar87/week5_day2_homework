@@ -22,38 +22,37 @@
 <h1>Search For The Pokemon You Want To Acquire!</h1>
 <form method='POST'>
     {{form.hidden_tag()}}
-    {{form.name}}
-    {{form.submit}}
+    {{form.name (placeholder="Pokemon Name")}}
+    {{form.submit (class="buttonc")}}
 
 </form>
-{% if check %}
 
 
 
-<div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="{{check.sprites}}" alt="">
-    <div class="card-body">
-      <h5 class="card-title">{{check.name.title()}}</h5>
-      <p>Ability: {{check.ability.title()}}</p>
-      <p>Hp: {{check.hp}}</p>
-      <p>Defense: {{check.defense}}</p>
-      <p>Attack: {{check.attack}}</p>
-      <a href="{{ url_for('catchP', pokemon_id=check.id) }}" class="btn btn-primary">Catch Me!</a>
-    </div>
+  {% if check %}
+
+  <div class="row">
+      <div class="col-sm-2 mb-2" id="roster">
+        <div class="card">
+          <img src="{{ check.sprites }}" class="card-img-top" alt="{{ check.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ check.name.title() }}</h5>
+            <p class="card-text">Ability: {{ check.ability.title() }}</p>
+            <p class="card-text">HP: {{ check.hp }}</p>
+            <p class="card-text">Attack: {{ check.attack }}</p>
+            <p class="card-text">Defense: {{ check.defense }}</p>
+            <a href="{{ url_for('catchP', pokemon_id=check.id) }}" class="buttonc btn">Catch Me!</a>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endif %}
   </div>
-    <!-- <div>
-        <p>Pokemon Name:{{check.name}}</p>
-        <p>Ability:{{check.ability}}</p>
-        <p>Front Shiny Sprite:<img src="{{check.sprites}}"></p>
-        <p>Base Stat For Hp:{{check.hp_base_experience}}</p>
-        <p>Base Stat For Defense:{{check.defense_base_stat}}</p>
-        <p>Base Stat For Attack:{{check.attack_base_state}}</p>
-        <a href="{{ url_for('catchP', pokemon_id=check.id) }}" class="btn btn-primary">Catch Me!</a>
-    </div> -->
+</div>
         
 </div>
     </div>
-{% endif %}
+
 
 
 

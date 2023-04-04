@@ -116,7 +116,7 @@ def theQuarl(user_id, opp_id):
         current_user.lose()
         opp.win()
         flash(f'Today wasnt your day try again tomorrow!')
-    return redirect(url_for('Quarl', user=user_id, opp_id=opp_id))
+    return redirect(url_for('Quarl', user=user_id, opp_id=opp_id, opp_list= opp_list))
 
 
 

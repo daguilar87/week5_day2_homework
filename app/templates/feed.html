@@ -1,29 +1,38 @@
+
 {% extends 'base.html' %}
 
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename= 'styles/feed.css') }}">
 
-<h1>Your Team!</h1>
+<div class="home">
+<h1 style="color: white">Your Pokemon Team</h1>
 
 
-    {% for p  in t %}
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{p.sprites}}" alt="">
-        <div class="card-body">
-          <h5 class="card-title">{{p.name.title()}}</h5>
-          <p>Ability: {{p.ability.title()}}</p>
-          <p>Hp: {{p.hp}}</p>
-          <p>Defense: {{p.defense}}</p>
-          <p>Attack: {{p.attack}}</p>
-          <a href="{{ url_for('releaseP', pokemon_id=p.id) }}" class="btn btn-primary">Release!</a>
+
+  <div class="row">
+    {% for p in t %}
+      <div class="col-sm-2 mb-2" id="roster">
+        <div class="card">
+          <img src="{{ p.sprites }}" class="card-img-top" alt="{{ p.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ p.name.title() }}</h5>
+            <p class="card-text">Ability: {{ p.ability.title() }}</p>
+            <p class="card-text">HP: {{ p.hp }}</p>
+            <p class="card-text">Attack: {{ p.attack }}</p>
+            <p class="card-text">Defense: {{ p.defense }}</p>
+            <a href="{{ url_for('releaseP', pokemon_id=p.id) }}" class="buttonc btn ">Release!</a>
+            </form>
+          </div>
         </div>
-        
-        
-        
-
-        
+      </div>
     {% endfor %}
+  </div>
+</div>
 
 
-{% endblock %}
+
+{%endblock%}
+
+
+
 

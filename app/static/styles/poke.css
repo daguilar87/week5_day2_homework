@@ -33,3 +33,33 @@
     .card-title{
         color: black;
     }
+
+    .buttonc{
+        color: white;
+        background-color: red;
+        border: none;
+        border-radius: 5px;
+        
+    }
+
+    .card {
+        margin: 0 auto;
+        float: none;
+        margin-bottom: 10px;
+        background-color: transparent;
+        color: black;
+        flex: 33%;
+        margin: 0;
+        margin-left: 5px;
+        border-width: 5px;
+        
+        
+    }
+    
+    .card-body {
+        background-color: transparent;
+        color: white;
+        text-align: center;
+    }
+
+
