@@ -8,7 +8,7 @@ db = SQLAlchemy()
 catch = db.Table(
     'catch',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), nullable=False),
-    db.Column('pokemon_id', db.Integer, db.ForeignKey('pokemon.id'), nullable=False)
+    db.Column('pokemon_id', db.Integer, db.ForeignKey('pokemon.id'), nullable=False, unique=True)
 )
 
 class User(db.Model, UserMixin):
@@ -42,8 +42,12 @@ class User(db.Model, UserMixin):
         db.session.commit()
     
     def addCatch(self, poke):
-        self.caught.append(poke)
-        db.session.commit()
+        if poke not in self.caught:
+            self.caught.append(poke)
+            db.session.commit()
+            return True
+        else:
+            return False
     
     def win(self):
         self.wins += 1

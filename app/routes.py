@@ -61,15 +61,18 @@ def pokePage():
 @app.route('/posts/like/<int:pokemon_id>')
 @login_required
 def catchP(pokemon_id):
-    poke= Pokemon.query.get(pokemon_id)
+    poke = Pokemon.query.get(pokemon_id)
     my_p = current_user.caught.all()
-    print(my_p)
     if poke in my_p or len(my_p) > 4:
         flash(f"You've already caught that pokemon!", category='warning')
     else:
-        current_user.addCatch(poke)
-        flash(f"Succesfully caught!", category='success')
-    return redirect(url_for('feed') )
+        if Pokemon.query.filter_by(id=pokemon_id).filter(Pokemon.caught.any(User.id == current_user.id)).first():
+            flash(f"This pokemon has already been caught by another user!", category='warning')
+        else:
+            current_user.addCatch(poke)
+            flash(f"Succesfully caught!", category='success')
+    return redirect(url_for('feed'))
+
 
 @app.route('/pokemon/feed')
 @login_required
@@ -93,32 +96,54 @@ def releaseP(pokemon_id):
 @login_required
 def Quarl():
     users = User.query.all()
-    return render_template('battle.html', users=users)
+    opp = User.query.filter_by().first()
+    opp_list = opp.caught.all()
+    return render_template('battle.html', users=users, opp_list=opp_list)
 
 @app.route('/quarl/<int:user_id> <int:opp_id>')
 @login_required
 def theQuarl(user_id, opp_id):
-    t_list= current_user.caught.all()
-    print(t_list)
-    current = 0
-    opp_list = User.query.filter_by(id=opp_id).first().caught.all()
-    print(opp_list)
-    opp_total = 0
+    user = User.query.filter_by(id=user_id).first()
+    user_pokemon = user.caught.all()
+    user_total = sum(p.attack + p.hp + p.defense for p in user_pokemon)
+    
     opp = User.query.filter_by(id=opp_id).first()
-    for poke in t_list:
-        current += poke.attack + poke.hp + poke.defense
-    for poke in opp_list:
-        opp_total += poke.attack + poke.hp + poke.defense
-    if current > opp_total:
-        current_user.win()
+    opp_pokemon = opp.caught.all()
+    opp_total = sum(p.attack + p.hp + p.defense for p in opp_pokemon)
+    
+    if user_total > opp_total:
+        user.win()
         opp.lose()
-    elif current < opp_total:
-        current_user.lose()
+    elif user_total < opp_total:
+        user.lose()
         opp.win()
-        flash(f'Today wasnt your day try again tomorrow!')
-    return redirect(url_for('Quarl', user=user_id, opp_id=opp_id, opp_list= opp_list))
+        flash('Today was not your day. Try again tomorrow!')
+    
+    return redirect(url_for('Quarl', user=user_id, opp_id=opp_id))
 
-
+# @app.route('/quarl/<int:user_id> <int:opp_id>')
+# @login_required
+# def theQuarl(user_id, opp_id):
+#     t_list = current_user.caught.all()
+#     current = 0
+#     for poke in t_list:
+#         current += poke.attack + poke.hp + poke.defense
+    
+#     opp = User.query.filter_by(id=opp_id).first()
+#     opp_list = opp.caught.all()
+#     opp_total = 0
+#     for poke in opp_list:
+#         opp_total += poke.attack + poke.hp + poke.defense
+    
+#     if current > opp_total:
+#         current_user.win()
+#         opp.lose()
+#     elif current < opp_total:
+#         current_user.lose()
+#         opp.win()
+#         flash('Today was not your day. Try again tomorrow!')
+    
+#     return redirect(url_for('Quarl', user=user_id, opp_id=opp_id))
 
 
 
