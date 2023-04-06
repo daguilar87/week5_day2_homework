@@ -4,9 +4,10 @@ from flask import render_template, request, url_for, redirect, flash
 from .forms import Pokeform
 import requests, json
 from flask_login import current_user, login_user, logout_user, login_required
-from .models import User, Pokemon, catch
+from .models import User, Pokemon, catch, db
 from .services import pokeapi
 from sqlalchemy import desc
+
 
 # def pokeapi(name):
 #         url =f'https://pokeapi.co/api/v2/pokemon/{name.lower()}'
@@ -58,20 +59,19 @@ def pokePage():
 
     return render_template('poke.html', form=form, u=current_user)
 
-@app.route('/posts/like/<int:pokemon_id>')
+
+@app.route('/catch/<int:pokemon_id>')
 @login_required
-def catchP(pokemon_id):
-    poke = Pokemon.query.get(pokemon_id)
-    my_p = current_user.caught.all()
-    if poke in my_p or len(my_p) > 4:
-        flash(f"You've already caught that pokemon!", category='warning')
+def catch_pokemon(pokemon_id):
+    pokemon = Pokemon.query.get(pokemon_id)
+    if pokemon in current_user.caught:
+        flash('You have already caught this pokemon!', 'warning')
+        return redirect(url_for('pokePage', pokemon_id=pokemon_id))
     else:
-        if Pokemon.query.filter_by(id=pokemon_id).filter(Pokemon.caught.any(User.id == current_user.id)).first():
-            flash(f"This pokemon has already been caught by another user!", category='warning')
-        else:
-            current_user.addCatch(poke)
-            flash(f"Succesfully caught!", category='success')
-    return redirect(url_for('feed'))
+        current_user.caught.append(pokemon)
+        db.session.commit()
+        flash('You have caught the pokemon!', 'success')
+        return redirect(url_for('pokePage', pokemon_id=pokemon_id))
 
 
 @app.route('/pokemon/feed')

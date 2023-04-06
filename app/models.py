@@ -8,7 +8,7 @@ db = SQLAlchemy()
 catch = db.Table(
     'catch',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), nullable=False),
-    db.Column('pokemon_id', db.Integer, db.ForeignKey('pokemon.id'), nullable=False, unique=True)
+    db.Column('pokemon_id', db.Integer, db.ForeignKey('pokemon.id'), nullable=False)
 )
 
 class User(db.Model, UserMixin):

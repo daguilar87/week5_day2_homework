@@ -41,7 +41,7 @@
             <p class="card-text">HP: {{ check.hp }}</p>
             <p class="card-text">Attack: {{ check.attack }}</p>
             <p class="card-text">Defense: {{ check.defense }}</p>
-            <a href="{{ url_for('catchP', pokemon_id=check.id) }}" class="buttonc btn">Catch Me!</a>
+            <a href="{{ url_for('catch_pokemon', pokemon_id=check.id) }}" class="buttonc btn">Catch Me!</a>
             </form>
           </div>
         </div>
