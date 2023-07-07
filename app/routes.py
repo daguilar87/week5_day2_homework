@@ -52,26 +52,34 @@ def pokePage():
                 defense = poke['defense']
                 attack = poke['attack']
 
-                check = Pokemon(pname, ability, sprites, hp, defense, attack)
-                check.saveFind()
+                check = Product(pname, ability, sprites, hp, defense, attack)
+                check.saveProduct()
                 print('bottom')
-                return render_template('poke.html', check=check, form=form, u=current_user)
+                return render_template('index.html', check=check, form=form)
 
     return render_template('poke.html', form=form, u=current_user)
+
 
 
 @app.route('/catch/<int:pokemon_id>')
 @login_required
 def catch_pokemon(pokemon_id):
     pokemon = Pokemon.query.get(pokemon_id)
-    if pokemon in current_user.caught:
-        flash('You have already caught this pokemon!', 'warning')
+    
+    if current_user.caught.filter_by(id=pokemon_id).count() > 0:
+        flash('You have already caught this Pokemon!', 'warning')
         return redirect(url_for('pokePage', pokemon_id=pokemon_id))
-    else:
-        current_user.caught.append(pokemon)
-        db.session.commit()
-        flash('You have caught the pokemon!', 'success')
+    
+    if current_user.caught.count() >= 5:
+        flash('You have already caught the maximum number of Pokemon!', 'warning')
         return redirect(url_for('pokePage', pokemon_id=pokemon_id))
+    
+    current_user.caught.append(pokemon)
+    db.session.commit()
+    flash(f'You have caught {pokemon.name}!', 'success')
+    return redirect(url_for('pokePage', pokemon_id=pokemon_id))
+
+
 
 
 @app.route('/pokemon/feed')

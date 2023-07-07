@@ -14,46 +14,47 @@
     {% include 'nav.html' %}
 
     {% block content %}
-    
-    
-    {% endblock %}
-<div class="home">
-<div class="text">
-<h1>Search For The Pokemon You Want To Acquire!</h1>
-<form method='POST'>
-    {{form.hidden_tag()}}
-    {{form.name (placeholder="Pokemon Name")}}
-    {{form.submit (class="buttonc")}}
 
-</form>
-
-
-
-  {% if check %}
-
-  <div class="row">
-      <div class="col-sm-2 mb-2" id="roster">
-        <div class="card">
-          <img src="{{ check.sprites }}" class="card-img-top" alt="{{ check.name }}">
-          <div class="card-body">
-            <h5 class="card-title">{{ check.name.title() }}</h5>
-            <p class="card-text">Ability: {{ check.ability.title() }}</p>
-            <p class="card-text">HP: {{ check.hp }}</p>
-            <p class="card-text">Attack: {{ check.attack }}</p>
-            <p class="card-text">Defense: {{ check.defense }}</p>
-            <a href="{{ url_for('catch_pokemon', pokemon_id=check.id) }}" class="buttonc btn">Catch Me!</a>
-            </form>
-          </div>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for message in messages %}
+            <div class="flash-message">{{ message }}</div>
+          {% endfor %}
         </div>
-      </div>
       {% endif %}
-  </div>
-</div>
-        
-</div>
+    {% endwith %}
+
+    <div class="home">
+      <div class="text">
+        <h1>Search For The Pokemon You Want To Acquire!</h1>
+        <form method='POST'>
+          {{ form.hidden_tag() }}
+          {{ form.name(placeholder="Pokemon Name") }}
+          {{ form.submit(class="buttonc") }}
+        </form>
+
+        {% if check %}
+          <div class="row">
+            <div class="col-sm-2 mb-2" id="roster">
+              <div class="card">
+                <img src="{{ check.sprites }}" class="card-img-top" alt="{{ check.name }}">
+                <div class="card-body">
+                  <h5 class="card-title">{{ check.name.title() }}</h5>
+                  <p class="card-text">Ability: {{ check.ability.title() }}</p>
+                  <p class="card-text">HP: {{ check.hp }}</p>
+                  <p class="card-text">Attack: {{ check.attack }}</p>
+                  <p class="card-text">Defense: {{ check.defense }}</p>
+                  <a href="{{ url_for('catch_pokemon', pokemon_id=check.id) }}" class="buttonc btn">Catch Me!</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
     </div>
 
+    {% endblock %}
 
-
-
-
+</body>
+</html>
